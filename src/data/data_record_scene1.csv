@@ -1,0 +1,1 @@
+time,real_time,vehicle_id,vehicle_type,location_x,location_y,location_z,velocity_x,velocity_y,velocity_z,acceleration_x,acceleration_y,acceleration_z,angular_velocity_x,angular_velocity_y,angular_velocity_z,rotation_roll,rotation_pitch,rotation_yaw,control_brake,control_throttle,control_steer

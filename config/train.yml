@@ -1,0 +1,330 @@
+# WorldParameters:
+carla_timeout: 100.0
+map_name: Town05
+record_speed: 2
+actor_active_distance: 100
+hybrid_physics_radius: 30
+tile_stream_distance: 100
+fps: 30
+fixed_delta_seconds: 0.016
+# TrafficParameters:
+num_vehicles: 0
+comm_trans_addr: "192.168.31.95"
+communication_distance: 70
+spwan_points_distance: 20
+area_limit:
+  min_x: -500
+  max_x: 5000
+  min_y: -500
+  max_y: 4000
+# DebugParameters:
+camera_height: 60
+debug_sp: False
+record: True
+debug_intersection: False
+debug: False
+# is_custum_map: True
+
+spwan_list:
+  - 136
+  - 135
+  - 173
+  - 176
+  - 295
+  - 294
+  - 153
+  - 154
+target_list:
+  - 86
+  - 85
+  - 101
+  - 100
+  - 11
+  - 12
+  - 41
+  - 42
+
+agents:
+  - name: "cav1"
+    ego_flag: True
+    acc_track: False
+    port: 9561
+    type: "vehicle.ford.crown"
+    start_point: 136
+    end_point: 2
+    ignore_traffic_light: False
+    main_port: 6000
+    traffic_agent_port: 9981
+    inter_port: 7901
+    v2x_name: "cav1_v2x"
+    share_mem: "CAV_1"
+    train_share_mem: "Train_CAV_1"
+    lidar_set:
+        upper_fov: "20"
+        lower_fov: "-25"
+        horizontal_fov: "360"
+        channels: "64"
+        range: "50"
+        rotation_frequency: 10
+        points_per_second: "750000"
+        dropoff_general_rate: "0.3"
+        dropoff_intensity_limit: "1.0"
+        dropoff_zero_intensity: "0.0"
+    point_color: [255, 255, 255]
+  - name: "cav2"
+    ego_flag: False
+    acc_track: False
+    port: 9562
+    type: "vehicle.ford.crown"
+    start_point: 135
+    end_point: 3
+    ignore_traffic_light: False
+    main_port: 6000
+    traffic_agent_port: 9981
+    inter_port: 7911
+    v2x_name: "cav2_v2x"
+    share_mem: "CAV_2"
+    train_share_mem: "Train_CAV_2"
+    lidar_set:
+      upper_fov: "20"
+      lower_fov: "-25"
+      horizontal_fov: "360"
+      channels: "64"
+      range: "50"
+      rotation_frequency: 10
+      points_per_second: "750000"
+      dropoff_general_rate: "0.3"
+      dropoff_intensity_limit: "1.0"
+      dropoff_zero_intensity: "0.0"
+    point_color: [252, 175, 62]
+  - name: "cav3"
+    ego_flag: False
+    acc_track: False
+    port: 9563
+    type: "vehicle.ford.crown"
+    start_point: 137
+    end_point: 136
+    ignore_traffic_light: False
+    main_port: 6000
+    traffic_agent_port: 9981
+    inter_port: 7921
+    v2x_name: "cav3_v2x"
+    share_mem: "CAV_3"
+    train_share_mem: "Train_CAV_3"
+    lidar_set:
+      upper_fov: "20"
+      lower_fov: "-25"
+      horizontal_fov: "360"
+      channels: "64"
+      range: "50"
+      rotation_frequency: 10
+      points_per_second: "750000"
+      dropoff_general_rate: "0.3"
+      dropoff_intensity_limit: "1.0"
+      dropoff_zero_intensity: "0.0"
+    point_color: [111, 215, 207]
+  - name: "cav4"
+    ego_flag: False
+    acc_track: False
+    port: 9564
+    type: "vehicle.ford.crown"
+    start_point: 50
+    end_point: 173
+    ignore_traffic_light: False
+    main_port: 6000
+    traffic_agent_port: 9981
+    inter_port: 7931
+    v2x_name: "cav4_v2x"
+    share_mem: "CAV_4"
+    train_share_mem: "Train_CAV_4"
+    lidar_set:
+      upper_fov: "20"
+      lower_fov: "-25"
+      horizontal_fov: "360"
+      channels: "32"
+      range: "50"
+      rotation_frequency: 10
+      points_per_second: "500000"
+      dropoff_general_rate: "0.3"
+      dropoff_intensity_limit: "1.0"
+      dropoff_zero_intensity: "0.0"
+    point_color: [138, 226, 52]
+  - name: "cav5"
+    ego_flag: False
+    acc_track: False
+    port: 9565
+    type: "vehicle.ford.crown"
+    start_point: 3
+    end_point: 173
+    ignore_traffic_light: False
+    main_port: 6000
+    traffic_agent_port: 9981
+    inter_port: 7941
+    v2x_name: "cav5_v2x"
+    share_mem: "CAV_5"
+    train_share_mem: "Train_CAV_5"
+    lidar_set:
+      upper_fov: "20"
+      lower_fov: "-25"
+      horizontal_fov: "360"
+      channels: "32"
+      range: "50"
+      rotation_frequency: 10
+      points_per_second: "500000"
+      dropoff_general_rate: "0.3"
+      dropoff_intensity_limit: "1.0"
+      dropoff_zero_intensity: "0.0"
+    point_color: [226, 226, 52]
+  - name: "cav6"
+    ego_flag: False
+    acc_track: False
+    port: 9566
+    type: "vehicle.ford.crown"
+    start_point: 100
+    end_point: 173
+    ignore_traffic_light: False
+    main_port: 6000
+    traffic_agent_port: 9981
+    inter_port: 7951
+    v2x_name: "cav6_v2x"
+    share_mem: "CAV_6"
+    train_share_mem: "Train_CAV_6"
+    lidar_set:
+      upper_fov: "20"
+      lower_fov: "-25"
+      horizontal_fov: "360"
+      channels: "32"
+      range: "50"
+      rotation_frequency: 10
+      points_per_second: "500000"
+      dropoff_general_rate: "0.3"
+      dropoff_intensity_limit: "1.0"
+      dropoff_zero_intensity: "0.0"
+    point_color: [52, 226, 52]
+    
+road_agents:
+  - name: "road1"
+    ego_flag: False
+    acc_track: False
+    port: 9661
+    type: "static.prop.streetsign"
+    ignore_traffic_light: False
+    main_port: 6000
+    traffic_agent_port: 9981
+    inter_port: 7902
+    v2x_name: "road1_v2x"
+    share_mem: "ROAD_1"
+    spawn_location:
+        x: 83.00
+        y: 189.00
+        z: 3.00
+        pitch: 0.00
+        yaw: 0.00
+        roll: 0.00
+    train_share_mem: "Train_ROAD_1"
+    lidar_set:
+        upper_fov: "10"
+        lower_fov: "-40"
+        horizontal_fov: "200"
+        channels: "64"
+        range: "70"
+        rotation_frequency: 20
+        points_per_second: "1500000"
+        dropoff_general_rate: "0.3"
+        dropoff_intensity_limit: "1.0"
+        dropoff_zero_intensity: "0.0"
+    point_color: [165, 40, 40]
+  - name: "road2"
+    ego_flag: False
+    acc_track: False
+    port: 9662
+    type: "static.prop.streetsign"
+    ignore_traffic_light: False
+    main_port: 6000
+    traffic_agent_port: 9981
+    inter_port: 7912
+    v2x_name: "road2_v2x"
+    share_mem: "ROAD_2"
+    spawn_location:
+        x: 79.50
+        y: 11.35
+        z: 3.00
+        pitch: 0.00
+        yaw: -45.00
+        roll: 0.00
+    train_share_mem: "Train_ROAD_2"
+    lidar_set:
+        upper_fov: "10"
+        lower_fov: "-40"
+        horizontal_fov: "270"
+        channels: "64"
+        range: "70"
+        rotation_frequency: 20
+        points_per_second: "1500000"
+        dropoff_general_rate: "0.3"
+        dropoff_intensity_limit: "1.0"
+        dropoff_zero_intensity: "0.0"
+    point_color: [165, 165, 40]
+  - name: "road3"
+    ego_flag: False
+    acc_track: False
+    port: 9663
+    type: "static.prop.streetsign"
+    ignore_traffic_light: False
+    main_port: 6000
+    traffic_agent_port: 9981
+    inter_port: 7922
+    v2x_name: "road3_v2x"
+    share_mem: "ROAD_3"
+    spawn_location:
+        x: 345.00
+        y: 201.00
+        z: 3.00
+        pitch: 0.00
+        yaw: 180.00
+        roll: 0.00
+    train_share_mem: "Train_ROAD_3"
+    lidar_set:
+        upper_fov: "10"
+        lower_fov: "-40"
+        horizontal_fov: "200"
+        channels: "64"
+        range: "70"
+        rotation_frequency: 20
+        points_per_second: "1500000"
+        dropoff_general_rate: "0.3"
+        dropoff_intensity_limit: "1.0"
+        dropoff_zero_intensity: "0.0"
+    point_color: [40, 165, 40]
+  - name: "road4"
+    ego_flag: False
+    acc_track: False
+    port: 9664
+    type: "static.prop.streetsign"
+    ignore_traffic_light: False
+    main_port: 6000
+    traffic_agent_port: 9981
+    inter_port: 7932
+    v2x_name: "road4_v2x"
+    share_mem: "ROAD_4"
+    spawn_location:
+        x: 326.00
+        y: 9.25
+        z: 3.00
+        pitch: 0.00
+        yaw: -45.00
+        roll: 0.00
+    train_share_mem: "Train_ROAD_4"
+    lidar_set:
+        upper_fov: "10"
+        lower_fov: "-40"
+        horizontal_fov: "270"
+        channels: "64"
+        range: "70"
+        rotation_frequency: 20
+        points_per_second: "1500000"
+        dropoff_general_rate: "0.3"
+        dropoff_intensity_limit: "1.0"
+        dropoff_zero_intensity: "0.0"
+    point_color: [40, 165, 165]
+

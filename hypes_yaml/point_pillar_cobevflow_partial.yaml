@@ -1,0 +1,162 @@
+name: point_pillar_cobevflow
+
+data_fusion:
+  scene_size: &scene_size 1
+
+fusion_mode: "partial"
+v2x_module: "cobevflow_processor_partial"
+trainer: "cobevflow_trainer_partial"
+tester: "cobevflow_tester_partial"
+reset_time: 300
+proj_first: True
+
+absolute_range: 100
+
+yaml_parser: "load_point_pillar_params"
+train_params:
+  batch_size: *scene_size
+  epoches: 150
+  eval_freq: 1
+  save_freq: 1
+  max_cav: &max_cav 4
+
+fusion:
+  #core_method: 'IntermediateFusionDataset' # LateFusionDataset, EarlyFusionDataset, IntermediateFusionDataset supported
+  args: []
+
+# preprocess-related
+preprocess:
+  # options: BasePreprocessor, VoxelPreprocessor, BevPreprocessor
+  core_method: 'SpVoxelPreprocessor'
+  args:
+    voxel_size: &voxel_size [0.4, 0.4, 4]
+    max_points_per_voxel: 32
+    max_voxel_train: 32000
+    max_voxel_test: 70000
+  # lidar range for each individual cav.
+  cav_lidar_range: &cav_lidar [-89.6, -89.6, -3, 89.6, 89.6, 1]
+  test_lidar_range: [-89.6, -89.6, -3, 89.6, 89.6, 1]
+
+data_augment:
+  - NAME: random_world_flip
+    ALONG_AXIS_LIST: [ 'x' ]
+
+  - NAME: random_world_rotation
+    WORLD_ROT_ANGLE: [ -0.78539816, 0.78539816 ]
+
+  - NAME: random_world_scaling
+    WORLD_SCALE_RANGE: [ 0.95, 1.05 ]
+
+# anchor box related
+postprocess:
+  core_method: 'VoxelPostprocessor' # VoxelPostprocessor, BevPostprocessor supported
+  anchor_args:
+    cav_lidar_range: *cav_lidar
+    l: 3.9
+    w: 1.6
+    h: 1.56
+    r: [0, 90]
+    feature_stride: 4
+    num: &achor_num 2
+  target_args:
+    pos_threshold: 0.6
+    neg_threshold: 0.45
+    score_threshold: 0.27
+  order: 'hwl' # hwl or lwh
+  max_num: 100 # maximum number of objects in a single frame. use this number to make sure different frames has the same dimension in the same batch
+  nms_thresh: 0.15
+
+# model related
+model:
+  core_method: point_pillar_cobevflow
+  args:
+    voxel_size: *voxel_size
+    lidar_range: *cav_lidar
+    anchor_number: *achor_num
+    max_cav: *max_cav
+    compression: 0 # compression rate
+    backbone_fix: false
+    batch_size: *scene_size
+    num_sweep_frames: 1
+
+    pillar_vfe:
+      use_norm: true
+      with_distance: false
+      use_absolute_xyz: true
+      num_filters: [64]
+    point_pillar_scatter:
+      num_features: 64
+
+    base_bev_backbone:
+      resnet: false
+      layer_nums: &layer_nums [3, 5, 8]
+      layer_strides: [2, 2, 2]
+      num_filters: &num_filters [64, 128, 256]
+      upsample_strides: [1, 2, 4]
+      num_upsample_filter: [128, 128, 128]
+      compression: 0
+      voxel_size: *voxel_size
+    shrink_header:
+      kernal_size: [ 3 ]
+      stride: [ 2 ]
+      padding: [ 1 ]
+      dim: [ 256 ]
+      input_dim: 384 # 128 * 3
+
+    rain_model:
+      # d_ff: 256
+      # h: 8
+      # num_layers: 1
+      # neighbor_range: 2
+      # dropout: 0
+      # max_len: 300
+      # input_dim: 64
+      voxel_size: *voxel_size
+      downsample_rate: 1
+      in_channels: 256
+      n_head: 8
+      dropout_rate: 0
+      only_attention: true
+      # fusion_setting:
+      #   sweep_length: *past_k
+      #   if_spatial_encoding : False
+      #   if_ego_time_encoding : false
+      #   if_nonego_time_encoding : true
+      #   if_sensor_encoding : False
+      #   if_time_attn_aggre : true
+      #   if_spatial_conv : False
+      #   if_dotproductattn : True
+      #   use_mask : True
+      #   confidence_fetch : false
+      communication:
+        num_blocks_thres: 1
+        round: 1
+        thre: 0.01
+        gaussian_smooth:
+          k_size: 5
+          c_sigma: 1.0
+      agg_operator:
+        mode: 'MAX' # MAX or RAIN
+        feature_dim: 256
+      multi_scale: True
+      layer_nums: *layer_nums
+      num_filters: *num_filters
+
+loss:
+  core_method: point_pillar_loss
+  args:
+    cls_weight: 1.0
+    reg: 2.0
+
+optimizer:
+  core_method: Adam
+  lr: 0.001
+  args:
+    eps: 1e-10
+    weight_decay: 1e-4
+
+lr_scheduler:
+  core_method: multistep #step, multistep and Exponential support
+  gamma: 0.1
+  step_size: [15, 50]
+
