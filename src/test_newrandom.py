@@ -187,8 +187,6 @@ def body(config, main_com, testers, mutex_lockers, cof_seg, cof_load, save_flag,
         pass
     load_conventional_agents(world, TM, config)
     
-    DataRecorder(config).start()
-
     uss = UnifiedSignalSystem(config, world, TM, testers, cof_seg, main_com, save_flag=save_flag,
                               eval_all_frame=eval_all_frame, eval_remain=eval_remain)
     uss.start()

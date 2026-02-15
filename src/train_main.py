@@ -334,7 +334,7 @@ def body(config, main_com, trainers, mutex_lockers, cof_seg, cof_load, save_flag
         pass
     load_conventional_agents(world, TM, config)
     
-    DataRecorder(config).start()
+    data_recorder = DataRecorder(config)
 
     uss = UnifiedSignalSystem(config, world, TM, trainers, cof_seg, main_com, save_flag=save_flag)
     uss.start()
