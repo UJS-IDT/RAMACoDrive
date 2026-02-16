@@ -81,7 +81,7 @@ Modify the `comm_trans_addr` field in your configuration file (`config/train.yml
     Please download the [Validation Scene](https://drive.google.com/file/d/1cw2BDVTst0t0Hxn3V0K4uszDnYDtJ-L2/view?usp=sharing) and [Test Scene](https://drive.google.com/file/d/136RP_dZiTyx-imEKemNbqQepp8aVphzb/view?usp=sharing), and place them in the carla_record directory.
 
 *   **Create Custom Scenarios:**
-    To record your own datasets, use the `DataRecorder` class in `src/data/recorder_manager.py`.
+    To record your own scenarios, use the `DataRecorder` class in `src/data/recorder_manager.py`.
     *   Insert `data_recorder.run_step(world)` inside the `run_step` function of your USS (Unified Sensing System) in train_main.py
     *   The save path can be configured within `recorder_manager.py`
 
